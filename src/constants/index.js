@@ -1,0 +1,19 @@
+export const FETC_POSTS = 'FETC_POSTS';
+export const CREATE = 'CREATE';
+export const ADD_LIKE = 'ADD_LIKE';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+export const AUTH = 'AUTH';
+export const LOGOUT = 'LOGOUT';
+export const SEARCH = 'SEARCH';
+export const COMMENT = 'COMMENT';
+export const OPEN_COMMENT = 'OPEN_COMMENT';
+export const FETCH_ONE = 'FETCH_ONE';
+export const CLOSE_COMMENT = 'CLOSE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const LIKE_COMMENT = 'LIKE_COMMENT';
+export const SIGNUP = 'SIGNUP';
+export const LOGIN = 'LOGIN';
+export const FETCH_USERS = 'FETCH_USERS';
+export const FOLLOW_USER = 'FOLLOW_USER';
+
