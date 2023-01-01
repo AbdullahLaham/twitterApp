@@ -14,16 +14,16 @@ import { AnimatePresence } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import { modalState, postIdlState } from '../atom/commentAtom';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {deletePost, likePost, openCommentSection} from '../actions/posts'
 const Post = ({post}) => {
   // the current user
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [likes, setLikes] = useState(post?.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [open, setOpen] = useRecoilState(modalState);
   const [comments, setComments] = useState([]);
-  
+  const {authData} = useSelector((state) => state?.authReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // router
@@ -48,7 +48,7 @@ const Post = ({post}) => {
   }
   
   useEffect(() => {
-    const index = post?.likes?.findIndex((like) => like === currentUser?._id)
+    const index = post?.likes?.findIndex((like) => like === authData?._id)
     if (index) setIsLiked(true)
     console.log('isLiked', index)
   }, [post?._id])
@@ -73,7 +73,7 @@ const Post = ({post}) => {
                 {comments.length > 0 && <p>{comments.length}</p>}
                 
             </div>
-            {currentUser?.email === post?.creatorEmail && (<div onClick={deleteThePost} className='rounded-full text-xl cursor-pointer hoverAnimation p-[1rem] hover:bg-red-200 hover:text-red-500'>
+            {authData?.email === post?.creatorEmail && (<div onClick={deleteThePost} className='rounded-full text-xl cursor-pointer hoverAnimation p-[1rem] hover:bg-red-200 hover:text-red-500'>
                 <FiTrash2 className='cursor-pointer '/>
             </div>)}
             {<div>

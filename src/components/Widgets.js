@@ -12,7 +12,7 @@ const Widgets = ({newNews, randomUsers}) => {
   const [showAll, setShowAll] = useState(false);
   const [usersNum, setUsersNum] = useState(3);
   const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const {users} = useSelector((state) => state?.posts);
   const {authData} = useSelector(state => state?.authReducer);
   console.log('ddddwwwwwwwwwwww', authData)
@@ -27,7 +27,7 @@ const Widgets = ({newNews, randomUsers}) => {
       <div className='sticky top-0 bg-white h-[4.8rem]' >
         <div className='flex items-center p-3 rounded-full relative ' >
             <BsSearch className='h-5 absolute left-[20px] z-10  ' />
-            <input type='text' placeholder='Search Twitter' className='w-[80%] h-10 rounded-md  pl-[2.5rem] focus:shadow-lg focus:bg-white w-[100%] sticky top-0 space-y-5  bg-blue-50 border-none outline-none ' />
+            <input type='text' placeholder='Search Twitter' className=' h-10 rounded-md  pl-[2.5rem] focus:shadow-lg focus:bg-white w-[100%] sticky top-0 space-y-5  bg-blue-50 border-none outline-none ' />
         </div>
       </div>
       <div className='text-gray-700 space-y-3 bg-gray-100 rounded-xl pt-1 ml-[1rem] w-[90%] xl:w-[81%] px-2 '>

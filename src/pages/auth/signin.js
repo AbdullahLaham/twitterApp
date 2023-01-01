@@ -18,7 +18,6 @@ const Signin = () => {
         signInWithPopup(auth, provider)
         const {displayName, photoURL, email, accessToken} = auth?.currentUser ? auth?.currentUser : {};
         console.log('user', auth?.currentUser);
-        
         const user = {
           userName: displayName,
           image: photoURL,
@@ -26,6 +25,7 @@ const Signin = () => {
           password: '',
           token: accessToken,
         }
+        
         if (user?.email) {
           dispatch(googleAuth(user));
           localStorage.setItem('user', JSON.stringify(user))

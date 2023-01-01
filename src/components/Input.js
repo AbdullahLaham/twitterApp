@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { BiHappy} from 'react-icons/bi'
 import {TbPhoto} from 'react-icons/tb'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {createPost} from '../actions/posts'
 const Input = () => {
   // input state 
@@ -11,6 +11,7 @@ const Input = () => {
   // the selected image state
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
+  const {authData} = useSelector((state) => state?.authReducer);
   // loading state
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -21,11 +22,11 @@ const Input = () => {
     if (loading) return;
     setLoading(true);
     const postDetails = {
-      id: currentUser?._id,
+      id: authData?._id,
       text: input,
-      creatorImage: currentUser?.image,
-      creatorName: currentUser?.userName,
-      creatorEmail: currentUser?.email,
+      creatorImage: authData?.image,
+      creatorName: authData?.userName,
+      creatorEmail: authData?.email,
       Image: selectedImage,
     }
     dispatch(createPost(postDetails));
@@ -49,7 +50,7 @@ const Input = () => {
   return (
     <div className='flex border-b border-gray-200 p-3 pl-[1.5rem] space-x-3'>
         {/* user image */}
-      <div className='p-[.5rem] h-[10rem] object-cover cursor-pointer hover:brightness-95'><img src={currentUser?.image} className='w-[3rem] h-[3rem] rounded-full' /></div>
+      <div className='p-[.5rem] h-[10rem] object-cover cursor-pointer hover:brightness-95'><img src={authData?.image} className='w-[3rem] h-[3rem] rounded-full' /></div>
       <div className=''>
         <div className='w-[100%] divide-y divide-gray-200 ' >
             <textarea  placeholder='whats happening!' value={input} onChange={(e) => setInput(e.target.value)} className='outline-none max-h-[8rem] resize-none min-h-[6rem] text-gray-500 text-[1.2rem] placeholder-gray-600 tracking-wide  min-w-[35rem] mx-auto form-textarea border-none focus:ring-0 ' ></textarea>

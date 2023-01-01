@@ -20,34 +20,19 @@ const CommentSection = () => {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [loading, setLoading] = useState(false);
     const {id} = useParams();
+    const {authData} = useSelector((state) => state?.authReducer);
     // dispatch
     const dispatch = useDispatch();
     // navigate
     const navigate = useNavigate();
-
-    // useEffect(() => {
-    //   console.log('postId', postId)
-    //   const unsubscribe = onSnapshot(query(collection(db, "posts"), orderBy("timestamp", "desc")), (snapshot) => {
-    //     setPosts(snapshot.docs);
-    //     snapshot.docs.map((post) => {
-    //       if (post?.id === localStorage.getItem('id')) {
-    //         setPost(post)
-    //      }  
-    //    })
-
-    //   });
-    //   setCurrentUser(JSON.parse(localStorage.getItem('user')))
-    // }, [postId]);
-
     
-
     const addComment = () => {
       const comment = {
         text: input,
         image: commentImage,
-        creatorImage: currentUser?.image,
-        creatorName: currentUser?.userName,
-        creatorEmail: currentUser?.email,
+        creatorImage: authData?.image,
+        creatorName: authData?.userName,
+        creatorEmail: authData?.email,
       }
       console.log(comment)
       dispatch(sendComment({comment, postId: post?._id}));
@@ -74,7 +59,7 @@ const CommentSection = () => {
                             <div className='flex items-center justify-between'><div className='flex items-center whitespace-nowrap'><p className='mr-[.5rem] cursor-pointer font-bold'>{post?.creatorName}</p><p className='mr-[.5rem]'>{post?.creatorEmail}</p><p className='mr-[.5rem] hover:underline hover:cursor-pointer text-sm '><Moment fromNow>{post?.createdAt}</Moment></p> </div></div>
                           </div>
                           <div className='flex items-center  justify-start mt-[2rem]'>
-                            <div className=' object-cover cursor-pointer hover:brightness-95 mt-[-1.2rem]'><img src={currentUser?.image} className='w-[3rem] h-[3rem] rounded-full' /></div>
+                            <div className=' object-cover cursor-pointer hover:brightness-95 mt-[-1.2rem]'><img src={authData?.image} className='w-[3rem] h-[3rem] rounded-full' /></div>
                             <textarea  placeholder='Tewet your reply' value={input} onChange={(e) => setInput(e.target.value)} className='outline-none max-h-[8rem] text-gray-500 resize-none text-[1.2rem] placeholder-gray-600 tracking-wide  min-w-[20rem] form-textarea pl-[1rem] border-none focus:ring-0 ' ></textarea>
                           </div>
                           <div className='flex items-center justify-between pt-2.5 border-t '>

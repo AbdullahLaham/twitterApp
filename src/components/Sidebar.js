@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const menuItems = [
     {
       text: "Home",
@@ -46,11 +47,11 @@ const menuItems = [
     },
   ];
 const Sidebar = () => {
+  const {authData} = useSelector((state) => state?.authReducer);
   const [active, setActive] = useState('Home');
   const {dispatch, state} = useContext(Store);
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const navigate = useNavigate();
-  console.log('userSid', currentUser);
   const handleGoogleSignout = () => {
     signOut(auth);
     localStorage.setItem('user', JSON.stringify({}));
@@ -65,7 +66,7 @@ const Sidebar = () => {
         <div className='space-y-2.5 mt-4 mb-2.5  flex flex-col '>
           {menuItems.map((item, i) => {
             return (
-              ((i < 2) || (i > 2 && currentUser)) && <div onClick={() => setActive(item.text)}>
+              ((i < 2) || (i > 2 && authData)) && <div onClick={() => setActive(item.text)}>
                 <SidebarLink  Icon = {item.icon} text={item.text} active={active == item.text}  />
               </div>
             )
@@ -73,7 +74,7 @@ const Sidebar = () => {
         </div>
         
         
-        {currentUser && (
+        {authData && (
           <>
             <button className='hidden xl:block text-center bg-blue-500 text-white rounded-full  cursor-pointer w-[13rem] h-12 hover:brightness-95 text-lg  '>Tweet</button>
             <div className='xl:hidden w-[3rem] p-[1rem] bg-blue-500 text-center  text-white font-bold cursor-pointer rounded-full'>
@@ -84,12 +85,12 @@ const Sidebar = () => {
        
       </div>
       {/* Mini Profile */}
-      {currentUser && (<div onClick={handleGoogleSignout} className='flex items-center justify-start text-gray-700 cursor-pointer  hoverAnimation'>
-        <img src={currentUser?.image} width='50px' height='50px' className='w-[3rem] h-[3rem] text-white rounded-full mr-[.3rem] object-cover'/>
+      {authData && (<div onClick={handleGoogleSignout} className='flex items-center justify-start text-gray-700 cursor-pointer  hoverAnimation'>
+        <img src={authData?.image} width='50px' height='50px' className='w-[3rem] h-[3rem] text-white rounded-full mr-[.3rem] object-cover'/>
         <div className='hidden lg:flex items-center justify-start text-gray-700 cursor-pointer mb-[.5rem]'>
           <div>
-            <h4 className='font-bold'>{currentUser.userName}</h4>
-            <p className='text-gray-500'>{currentUser?.email}</p>
+            <h4 className='font-bold'>{authData.userName}</h4>
+            <p className='text-gray-500'>{authData?.email}</p>
           </div>
           <CgMoreAlt className='text-3xl ml-[.3rem] ' />
         </div>

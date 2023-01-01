@@ -2,13 +2,14 @@ import React from 'react'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import * as yup from 'yup'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useField } from "formik";
 import { loginRequest } from '../actions/userAuth';
 const LoginForm = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
+  const {authData} = useSelector((state) => state?.authReducer);
   const PASSWORD_REGEX = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})';
   const validationSchema = yup.object({
     email: yup.string().email('please enter a valid email').required("the email is required"),

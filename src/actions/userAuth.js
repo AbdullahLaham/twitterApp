@@ -5,7 +5,6 @@ export const loginRequest = (details) => async (dispatch) => {
     localStorage.setItem('user', JSON.stringify(data));
     dispatch({type: LOGIN, payload: data})
     console.log(data);
-    window.location.reload();
 }
 
 
@@ -14,7 +13,6 @@ export const signupRequest = (details) => async (dispatch) => {
     console.log('rrrrrrrrrrrrrrrrrrr', data);
     localStorage.setItem('user', JSON.stringify(data));
     dispatch({type: SIGNUP, payload: data});
-    window.location.reload();
     // console.log('new useruuuuuuuuuuuuuuuuuuuuuuuu', data);
     
     
@@ -22,8 +20,6 @@ export const signupRequest = (details) => async (dispatch) => {
 }
 export const fetchUsers = () => async (dispatch) => {
     const {data} = await api.fetchUsers();
-    
-    console.log('rooooooooorrrrkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
     dispatch({type: FETCH_USERS, payload: data});   
 }
 

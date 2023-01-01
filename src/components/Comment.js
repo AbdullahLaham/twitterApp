@@ -18,10 +18,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Comment = ({postId, comment, userId}) => {
   const { post } = useSelector((state) => state?.posts);
+  const {authData} = useSelector((state) => state?.authReducer);
 
-    console.log('gggg', comment);
+  console.log('gggg', comment);
   // the current user
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [likes, setLikes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
   const [open, setOpen] = useRecoilState(modalState);
@@ -31,7 +32,7 @@ const Comment = ({postId, comment, userId}) => {
   // adding like to the post function
   const addLikeToComment = async () => {
     dispatch(likeComment({postId, commentId: comment?._id}));
-    const index = comment?.likes.findIndex((like) => like == currentUser?._id);
+    const index = comment?.likes.findIndex((like) => like == authData?._id);
     console.log('indeeeeee', index)
     if (index >= 0) setIsLiked(true);
     else setIsLiked(false);
@@ -45,11 +46,11 @@ const Comment = ({postId, comment, userId}) => {
   }
   useEffect(() => {
     console.log(comment?.likes.length);
-    const index = comment?.likes.findIndex((like) => like == currentUser?._id);
+    const index = comment?.likes.findIndex((like) => like == authData?._id);
     if (index >= 0) setIsLiked(true);
     else setIsLiked(false);
     
-  }, [comments, currentUser, likes, isLiked])
+  }, [comments, authData, likes, isLiked])
 
   return (
     <div className='flex justify-start mb-[2rem] p-[1rem]'>

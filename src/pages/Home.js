@@ -15,7 +15,7 @@ export default function Home() {
   const [randomUsers, setRandomUsers] = useState([]);
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
+  // const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
   const navigate = useNavigate();
   const {authData} = useSelector(state => state?.authReducer);
   console.log('rr', authData)
@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!currentUser?.email) navigate('/auth', {replace: true},);
+    if (!authData?.email) navigate('/auth', {replace: true},);
   }, [navigate]);
 
   return (

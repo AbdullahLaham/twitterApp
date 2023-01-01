@@ -17,7 +17,8 @@ import {getSinglePost} from '../actions/posts';
 const PostPage = () => { 
   const [newNews, setNewNews] = useState([]);
   const [randomUsers, setRandomUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
+  const {authData} = useSelector((state) => state?.authReducer);
+  // const [currentUser, setCurrentUser] = useState({});
   // the post from the Id
   const { post } = useSelector((state) => state?.posts);
   // get the postId from the link
@@ -68,7 +69,7 @@ const PostPage = () => {
           
         </div>
         {post && <Post post={post}/>}
-        {post?.comments?.map((comment, i) => <Comment key={i} postId={post?._id} comment={comment} userId={currentUser?._id} />)}
+        {post?.comments?.map((comment, i) => <Comment key={i} postId={post?._id} comment={comment} userId={authData?._id} />)}
     </div>   
         {/* CommentSection */}
         {/* <CommentSection /> */}
