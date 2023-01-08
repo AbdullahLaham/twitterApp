@@ -35,9 +35,9 @@ export default function Home() {
     
   }, []);
 
-  useEffect(() => {
-    if (!authData?.email) navigate('/auth', {replace: true},);
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (!authData?.email) navigate('/auth', {replace: true},);
+  // }, [navigate]);
 
   return (
     <div  >
