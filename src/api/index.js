@@ -1,7 +1,7 @@
 import { async } from '@firebase/util';
 import axios from 'axios';
 
-const API = axios.create({baseURL: 'http://localhost:5000/'});
+const API = axios.create({baseURL: 'https://twitter-backend-clone.vercel.app/'});
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('user')) {
