@@ -7,15 +7,14 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAodpKv81I9DRKdi_BmBoC_Z42Tjz3f1VI",
-  authDomain: "twitter-fcd7e.firebaseapp.com",
-  databaseURL: "https://twitter-fcd7e-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "twitter-fcd7e",
-  storageBucket: "twitter-fcd7e.appspot.com",
-  messagingSenderId: "633049463065",
-  appId: "1:633049463065:web:fc9db20ddbdb2a66f4ad88"
+  apiKey: "AIzaSyDcxpzuxqS7V2gGcren54B89z5Ht8OkTnI",
+  authDomain: "challenge-63366.firebaseapp.com",
+  projectId: "challenge-63366",
+  storageBucket: "challenge-63366.appspot.com",
+  messagingSenderId: "90758238522",
+  appId: "1:90758238522:web:b23e140fe32e1d19024003",
+  measurementId: "G-FR5RD8K334"
 };
-
 // Initialize Firebase
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
